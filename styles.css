@@ -1,9 +1,28 @@
+/* CSS DIRECTORY
+	1. =IMPORTS
+	2. =GLOBAL SETTINGS
+	3. =TITLE
+	4. =
+*/
+
 /* ======================
-           IMPORTS 
+        1. IMPORTS 
    ====================== */
 @import url(./styles/reset.css);
 
 
 /* ======================
-        GLOBAL SETTINGS 
+    2. GLOBAL SETTINGS 
+   ====================== */
+
+* {
+
+}
+
+body {
+    
+}
+
+/* ======================
+         3. TITLE 
    ====================== */
