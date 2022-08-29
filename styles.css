@@ -9,16 +9,16 @@
 /* ======================
         1. IMPORTS 
    ====================== */
-@import url(./styles/reset.css);
 
+@import url(./styles/reset.css);
 
 /* ======================
     2. GLOBAL SETTINGS 
    ====================== */
 
 * {
-    outline: 1px solid red;
-}
+/*     outline: 1px solid red;
+ */}
 
 .body {
     height: 100vh;
@@ -50,9 +50,21 @@
     display: grid;
     grid-template: 250px 250px 250px / 250px 250px 250px;
     gap: 20px;
-    padding: 20px;
+    background-color: black;
 }
 
 /* ======================
        5. BOARD BOXES 
    ====================== */
+
+.box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    font-size: 10rem;
+}
+
+.box:hover {
+    background-color: rgb(199, 199, 199);
+}
