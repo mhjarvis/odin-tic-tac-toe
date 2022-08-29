@@ -2,7 +2,8 @@
 	1. =IMPORTS
 	2. =GLOBAL SETTINGS
 	3. =TITLE
-	4. =
+	4. =GAME BOARD
+    5. =BOARD BOXES
 */
 
 /* ======================
@@ -15,8 +16,43 @@
     2. GLOBAL SETTINGS 
    ====================== */
 
+* {
+    outline: 1px solid red;
+}
+
+.body {
+    height: 100vh;
+    width: 100%;
+}
+
 /* ======================
          3. TITLE 
    ====================== */
 
-   
+.heading {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 3rem;
+    padding: 50px 0;
+}
+
+/* ======================
+       4. GAME BOARD 
+   ====================== */
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.board {
+    display: grid;
+    grid-template: 250px 250px 250px / 250px 250px 250px;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* ======================
+       5. BOARD BOXES 
+   ====================== */
