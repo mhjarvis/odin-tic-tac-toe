@@ -4,6 +4,7 @@
 	3. =TITLE
 	4. =GAME BOARD
     5. =BOARD BOXES
+    6. =GAME BOARD
 */
 
 /* ======================
@@ -17,8 +18,8 @@
    ====================== */
 
 * {
-/*     outline: 1px solid red;
- */}
+    outline: 1px solid red;
+}
 
 .body {
     height: 100vh;
@@ -33,7 +34,7 @@
     display: flex;
     justify-content: flex-start;
     font-size: 3rem;
-    padding: 50px 0;
+    padding: 50px 20px;
 }
 
 /* ======================
@@ -68,3 +69,34 @@
 .box:hover {
     background-color: rgb(199, 199, 199);
 }
+
+/* ======================
+       6. GAME BOARD 
+   ====================== */
+   
+.scoreboard-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    width: 100%;
+}
+
+.scoreboard {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 600px;
+    height: 120px;
+}
+
+.score-div {
+    width: 200px;
+    height: 100px;
+}
+
+.score-div {
+    
+}
+
