@@ -1,11 +1,18 @@
 
 // Module function for the gameboard
-const game = (() => {
+const gameBoard = (() => {
 
     let boardStatus = [['', '', ''], ['', '', ''], ['', '', '']];
 
-    console.log('test')
 })();
+
+// Factory function for creating players
+const player = (name, marker) => {
+    return { name, marker };
+}
+
+const player1 = player('Player 1', 'X');
+const computer = player('Computer', 'O');
 
 
 
