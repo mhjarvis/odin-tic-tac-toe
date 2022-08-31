@@ -92,11 +92,24 @@
 }
 
 .score-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 200px;
     height: 100px;
 }
 
-.score-div {
-    
+.score-div p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: 2rem;
 }
 
+.player-one-title, .ties-title, .player-two-title {
+    border-bottom: 2px solid black;
+}
