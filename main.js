@@ -24,7 +24,7 @@ const gameBoard = (() => {
     startButton.addEventListener("click", function() {
         console.log("start-button");
     })
-    
+    and 
     const resetButton = document.querySelector('.reset-game-button');
     resetButton.addEventListener("click", function() {
         console.log("restart-button");
