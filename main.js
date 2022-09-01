@@ -11,16 +11,15 @@ const gameBoard = (() => {
         }
     }
 
-    function addListeners() {
-        for(let i = 0; i < 9; i++) {
-            const box = document.getElementById(`box${i}`);
-            box.addEventListener("click", function() {
-                console.log(`box${i}`);
-            })
-        }
+    // Add event listeners to each box element
+    for(let i = 0; i < 9; i++) {
+        const box = document.getElementById(`box${i}`);
+        box.addEventListener("click", function() {
+            console.log(`box${i}`);
+        })
     }
 
-    return { setGameBoard, addListeners };
+    return { setGameBoard };
 
 })();
 
@@ -28,7 +27,6 @@ const gameBoard = (() => {
 const game = (() => {
 
     gameBoard.setGameBoard();
-    gameBoard.addListeners();
 
 })();
 
