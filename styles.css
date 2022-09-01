@@ -116,6 +116,10 @@
     border-bottom: 2px solid black;
 }
 
+.player-one-wins, .ties {
+    border-right: 2px solid black;
+}
+
 .game-button-container {
     display: flex;
     align-items: center;
