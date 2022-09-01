@@ -59,3 +59,19 @@ const computer = player('Computer', 'O');
     6c. If you get this running definitely come show it off in the chatroom. It’s quite an accomplishment!
 
 */
+
+/* To Do:
+
+Game Object:
+    1. setCurrentPlayer();
+    2. startGameButton();
+    3. resetGameButton();
+
+Gameboard Object:
+    1. checkForMark()
+    2. addMarkToBoard()
+    3. checkWinCondition();
+        a. output after window
+
+Player Object:
+    1. setPlayerName() */
