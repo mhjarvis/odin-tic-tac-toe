@@ -19,6 +19,23 @@ const gameBoard = (() => {
         })
     }
 
+    // Add event listeners for the Start / Reset buttons
+    const startButton = document.querySelector('.start-game-button');
+    startButton.addEventListener("click", function() {
+        console.log("start-button");
+    })
+    
+    const resetButton = document.querySelector('.reset-game-button');
+    resetButton.addEventListener("click", function() {
+        console.log("restart-button");
+        resetGame();
+    })
+
+    function resetGame() {
+        boardStatus = ['', '', '', '', '', '', '', '', ''];
+        setGameBoard();
+    }
+
     return { setGameBoard };
 
 })();
@@ -64,8 +81,7 @@ const computer = player('Computer', 'O');
 
 Game Object:
     1. setCurrentPlayer();
-    2. startGameButton();
-    3. resetGameButton();
+    2. startGameButton() action (event listener is added)
 
 Gameboard Object:
     1. checkForMark()
@@ -75,3 +91,17 @@ Gameboard Object:
 
 Player Object:
     1. setPlayerName() */
+
+
+
+/* Completed:
+
+Game Object:
+    3. resetGameButton() action (event listener is added) - completed, resets array and displays array;
+
+Gameboard Object:
+
+
+Player Object:
+
+*/
