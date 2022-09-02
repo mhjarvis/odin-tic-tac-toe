@@ -1,63 +1,71 @@
 
-// Module function for the gameboard
+/* ======================
+        GAMEBOARD OBJ
+   ====================== */
+
 const gameBoard = (() => {
 
-    let boardStatus = ['x', 'e', 'd', 'e', 'd', 'e', 'd', 'e', 'd'];       // current gameboard layout
+    let boardStatus = ['x', 'e', 'd', 'e', 'd', 'e', 'd', 'e', 'd'];
 
-    function setGameBoard() {       // populate gameboard with current board status
+    function buildGameBoard() {
         for(let i = 0; i < 9; i++) {
             const box = document.getElementById(`box${i}`);
             box.innerHTML = boardStatus[i];
         }
     }
 
-    // Add event listeners to each box element
+    /* ====================== EVENT LISTENERS ====================== */
+
     for(let i = 0; i < 9; i++) {
-        const box = document.getElementById(`box${i}`);
+        const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
             console.log(`box${i}`);
         })
     }
 
-    // Add event listeners for the Start / Reset buttons
-    const startButton = document.querySelector('.start-game-button');
+    const startButton = document.querySelector('.start-game-button');       // start-game button
     startButton.addEventListener("click", function() {
         console.log("start-button");
     })
-    and 
-    const resetButton = document.querySelector('.reset-game-button');
+    
+    const resetButton = document.querySelector('.reset-game-button');       // reset-game button
     resetButton.addEventListener("click", function() {
         console.log("restart-button");
-        resetGame();
+        resetGameBoard();
     })
 
-    function resetGame() {
+    /* ====================== RESET GAME BOARD ====================== */
+
+    function resetGameBoard() {
         boardStatus = ['', '', '', '', '', '', '', '', ''];
-        setGameBoard();
+        buildGameBoard();
     }
 
-    return { setGameBoard };
-
+    return { buildGameBoard };
 })();
 
-// Module function that runs the game
-const game = (() => {
+/* ======================
+        PLAYER FACTORY
+   ====================== */
 
-    gameBoard.setGameBoard();
-
-})();
-
-// Factory function for creating players
-const player = (name, marker) => {
+const player = (playerName, playerMark) => {
     let wins = 0;
-    return { name, marker, wins};
+    return { playerName, playerMark, wins};
 }
 
-// Create player and computer
-const player1 = player('Player 1', 'X');
-const computer = player('Computer', 'O');
+/* ======================
+        GAME-PLAY OBJ
+   ====================== */
+   
+   const gamePlay = (() => {
 
+    gameBoard.buildGameBoard();     // initialize gameboard
 
+    // Create player and computer
+    const player1 = player('Player 1', 'X');
+    const computer = player('Computer', 'O');
+
+})();
 
 
 /*
