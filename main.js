@@ -65,6 +65,12 @@ const player = (playerName, playerMark) => {
     const player1 = player('Player 1', 'X');
     const computer = player('Computer', 'O');
 
+    function pickWhoGoesFirst(player_1, player_2) {
+        if(Math.random() >= 0.5) {
+            return player_1;
+        }
+        return player_2;
+    }
 })();
 
 
