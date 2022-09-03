@@ -1,9 +1,9 @@
- 
+
 /* ======================
         GAMEBOARD OBJ
    ====================== */
 
-   const gameBoard = (() => {
+const gameBoard = (() => {
 
     let boardStatus = ['', '', '', '', '', '', '', '', ''];
     const winCondition = [
@@ -30,13 +30,6 @@
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
             console.log(`box${i}`);
-
-            makeMark(i);
-
-
-
-
-
         })
     }
 
@@ -58,11 +51,6 @@
         buildGameBoard();
     }
 
-    function makeMark(position) {
-        boardStatus[position] = gamePlay.getCurrentPlayersMark();
-        buildGameBoard();
-    }
-
     return { buildGameBoard, winCondition };
 })();
 
@@ -75,10 +63,6 @@ const player = (playerName, playerMark) => {
     return { playerName, playerMark, wins};
 }
 
-    // Create player and computer
-    const player1 = player('Player 1', 'X');
-    const player2 = player('Player 2', 'O');
-
 /* ======================
         GAME-PLAY OBJ
    ====================== */
@@ -87,61 +71,32 @@ const player = (playerName, playerMark) => {
 
     gameBoard.buildGameBoard();     // initialize gameboard
 
-    let wonGame = false;
-
     let playerTurn = pickWhoGoesFirst();
+    console.log(playerTurn);
 
-    console.log(playerTurn.playerName);
-
-
-
-
-
-    let count = 0;
-
-    function playTurn() {
-
-
-        console.log(count + '. ' + playerTurn.playerName);
-        updatePlayerTurnInDOM();
-        updatePlayerTurn();
+    // Create player and computer
+    const player1 = player('Player 1', 'X');
+    const computer = player('Plyer 2', 'O');
 
 
 
 
 
-        count++;
-        //wonGame = true;
-    }
 
-    function updatePlayerTurnInDOM() {
-        const turnText = document.querySelector('.turn-indicator');
-        turnText.innerHTML = `It is ${playerTurn.playerName}'s turn.`;
-    }
 
-    function updatePlayerTurn() {
-        if(playerTurn == player1) {
-            playerTurn = player2;
-        } else {
-            playerTurn = player1;
-        }
-    }
+
+
+
 
     function pickWhoGoesFirst() {
         if(Math.random() >= 0.5) {
-            return player1;
+            return 'player1';
         }
-        return player2;
-    } 
-
-    function getCurrentPlayersMark() {
-        return playerTurn.playerMark;
+        return 'player2';
     }
-
-    return { playTurn, getCurrentPlayersMark }
 })();
 
-   
+
 /*
 3. Build the functions that allow players to add marks to a specific spot on the board, and then tie it to the DOM, letting players click on the gameboard to place their marker. Don’t forget the logic that keeps players from playing in spots that are already taken!
 
