@@ -29,9 +29,10 @@
     for(let i = 0; i < 9; i++) {
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
-            console.log(`box${i}`);
 
             makeMark(i);
+            gamePlay.playTurn();
+
 
 
 
@@ -39,6 +40,8 @@
 
         })
     }
+
+    
 
     const startButton = document.querySelector('.start-game-button');       // start-game button
     startButton.addEventListener("click", function() {
@@ -75,48 +78,38 @@ const player = (playerName, playerMark) => {
     return { playerName, playerMark, wins};
 }
 
-    // Create player and computer
-    const player1 = player('Player 1', 'X');
-    const player2 = player('Player 2', 'O');
+// Create player and computer
+const player1 = player('Player 1', 'X');
+const player2 = player('Player 2', 'O');
 
 /* ======================
         GAME-PLAY OBJ
    ====================== */
    
-   const gamePlay = (() => {
+const gamePlay = (() => {
 
     gameBoard.buildGameBoard();     // initialize gameboard
 
     let wonGame = false;
-
     let playerTurn = pickWhoGoesFirst();
 
-    console.log(playerTurn.playerName);
-
-
-
-
-
-    let count = 0;
+    console.log(playerTurn.playerName + 
+        " goes first");
 
     function playTurn() {
 
-
-        console.log(count + '. ' + playerTurn.playerName);
-        updatePlayerTurnInDOM();
         updatePlayerTurn();
+        console.log(playerTurn.playerName);
+        updatePlayerTurnInDOM();
 
-
-
-
-
-        count++;
         //wonGame = true;
     }
 
     function updatePlayerTurnInDOM() {
-        const turnText = document.querySelector('.turn-indicator');
-        turnText.innerHTML = `It is ${playerTurn.playerName}'s turn.`;
+        console.log(playerTurn.playerName + " in dom");
+        const turnText = document.querySelector('.scoreboard-updates');
+        turnText.innerHTML = '';
+        turnText.innerHTML += `It is ${playerTurn.playerName}'s turn.`;
     }
 
     function updatePlayerTurn() {
@@ -138,7 +131,7 @@ const player = (playerName, playerMark) => {
         return playerTurn.playerMark;
     }
 
-    return { playTurn, getCurrentPlayersMark }
+    return { playTurn, getCurrentPlayersMark, updatePlayerTurn }
 })();
 
    
