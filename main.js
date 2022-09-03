@@ -35,13 +35,8 @@
             }
             
             makeMark(i);
+            checkForWin();
             gamePlay.playTurn();
-
-
-
-
-
-
         })
     }
 
@@ -66,6 +61,17 @@
     function makeMark(position) {
         boardStatus[position] = gamePlay.getCurrentPlayersMark();
         buildGameBoard();
+    }
+
+    function checkForWin() {
+
+        for(let i = 0; i < 8; i++) {
+            if(boardStatus[winCondition[i][0]] === 'X' && boardStatus[winCondition[i][1]] === 'X' && boardStatus[winCondition[i][2]] === 'X') {
+                console.log('X Wins');
+            } else if(boardStatus[winCondition[i][0]] === 'O' && boardStatus[winCondition[i][1]] === 'O' && boardStatus[winCondition[i][2]] === 'O') {
+                console.log('O Wins');
+            }
+        }
     }
 
     return { buildGameBoard, winCondition };
@@ -152,10 +158,6 @@ const gamePlay = (() => {
 
    
 /*
-3. Build the functions that allow players to add marks to a specific spot on the board, and then tie it to the DOM, letting players click on the gameboard to place their marker. Don’t forget the logic that keeps players from playing in spots that are already taken!
-
-    3a. Think carefully about where each bit of logic should reside. Each little piece of functionality should be able to fit in the game, player or gameboard objects.. but take care to put them in “logical” places. Spending a little time brainstorming here can make your life much easier later!
-
 4. Build the logic that checks for when the game is over! Should check for 3-in-a-row and a tie.
 
 5. Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that congratulates the winning player!
