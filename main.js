@@ -4,6 +4,7 @@
    ====================== */
 
    let hasSomeoneWon = false;
+
    const gameBoard = (() => {
 
     let boardStatus = ['', '', '', '', '', '', '', '', ''];
@@ -60,7 +61,6 @@
     
     const resetButton = document.querySelector('.reset-game-button');       // reset-game button
     resetButton.addEventListener("click", function() {
-        console.log("restart-button");
         resetGameBoard();
     })
 
@@ -69,6 +69,7 @@
     function resetGameBoard() {
         boardStatus = ['', '', '', '', '', '', '', '', ''];
         buildGameBoard();
+        hasSomeoneWon = false;
     }
 
     function updateScoreBoard() {
