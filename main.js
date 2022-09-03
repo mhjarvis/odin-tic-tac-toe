@@ -3,6 +3,7 @@
         GAMEBOARD OBJ
    ====================== */
 
+   let hasSomeoneWon = false;
    const gameBoard = (() => {
 
     let boardStatus = ['', '', '', '', '', '', '', '', ''];
@@ -30,6 +31,10 @@
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
             
+            if(hasSomeoneWon === true){
+                return;
+            }
+
             if(boardStatus[i] !== '') {                     // do nothing if index has a value
                 return;
             }
@@ -40,6 +45,7 @@
             if(checking) {
                 checking.wins++;
                 updateScoreBoard();
+                hasSomeoneWon = true;
                 return;
             }
 
@@ -146,11 +152,9 @@ const gamePlay = (() => {
         const turnText = document.querySelector('.scoreboard-updates');
 
         if(status) {
-            console.log('tesst');
             turnText.innerHTML = `${status.playerName} Won!`;
             return false;
         }
-        console.log('showing after status');
 
         if(turnText.innerHTML === '') {
             turnText.innerHTML = `${playerTurn.playerName} goes first.`;
