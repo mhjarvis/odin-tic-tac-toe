@@ -79,8 +79,8 @@ const player = (playerName, playerMark) => {
 }
 
 // Create player and computer
-const player1 = player('Player 1', 'X');
-const player2 = player('Player 2', 'O');
+const player1 = player('Player 1', '');
+const player2 = player('Player 2', '');
 
 /* ======================
         GAME-PLAY OBJ
@@ -92,26 +92,32 @@ const gamePlay = (() => {
 
     let wonGame = false;
     let playerTurn = pickWhoGoesFirst();
+    updatePlayerTurnInDOM();
 
-    console.log(playerTurn.playerName + 
-        " goes first");
-
+    /* ====================== PLAY TURN ====================== */
     function playTurn() {
 
-        updatePlayerTurn();
-        console.log(playerTurn.playerName);
-        updatePlayerTurnInDOM();
+        updatePlayerTurn();                     // update the current player status 
+        updatePlayerTurnInDOM();                // notify players who's turn it is
 
-        //wonGame = true;
     }
 
+    /* ====================== TEXT OUTPUT TO PLAYERS ====================== */
     function updatePlayerTurnInDOM() {
         console.log(playerTurn.playerName + " in dom");
+
         const turnText = document.querySelector('.scoreboard-updates');
+
+        if(turnText.innerHTML === '') {
+            turnText.innerHTML = `${playerTurn.playerName} goes first.`;
+            return;
+        }
+
         turnText.innerHTML = '';
         turnText.innerHTML += `It is ${playerTurn.playerName}'s turn.`;
     }
 
+    /* ====================== PLAYER TURN UPDATER ====================== */
     function updatePlayerTurn() {
         if(playerTurn == player1) {
             playerTurn = player2;
@@ -120,10 +126,15 @@ const gamePlay = (() => {
         }
     }
 
+    /* ====================== SET WHO GOES FIRST / SET PLAYER MARKERS ====================== */
     function pickWhoGoesFirst() {
         if(Math.random() >= 0.5) {
+            player1.playerMark = 'X';
+            player2.playerMark = 'O';
             return player1;
         }
+        player2.playerMark = 'X';
+        player1.playerMark = 'O';
         return player2;
     } 
 
