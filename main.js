@@ -4,6 +4,7 @@
    ====================== */
 
    let hasSomeoneWon = false;
+   turnCount = 0;
 
    const gameBoard = (() => {
 
@@ -19,6 +20,7 @@
         [2, 4, 6]
     ]
 
+    /* ====================== BOARD SETUP ====================== */
     function buildGameBoard() {
         for(let i = 0; i < 9; i++) {
             const box = document.getElementById(`box${i}`);
@@ -32,18 +34,19 @@
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
             
-            if(hasSomeoneWon === true){
+            if(hasSomeoneWon === true){             // prevent further marks if there is a winner
                 return;
             }
 
-            if(boardStatus[i] !== '') {                     // do nothing if index has a value
+            if(boardStatus[i] !== '') {             // prevent marks on squares that have been marked
                 return;
             }
             
-            makeMark(i);
-            let checking = checkForWin();
+            addPlayerMark(i);
 
+            let checking = checkForWin();
             if(checking) {
+                console.log('checking ' + checking.playerName);
                 checking.wins++;
                 updateScoreBoard();
                 hasSomeoneWon = true;
@@ -72,6 +75,7 @@
         hasSomeoneWon = false;
     }
 
+    /* ====================== UPDATE SCOREBOARD DISPLAY ====================== */
     function updateScoreBoard() {
         const player1Mark = document.querySelector('.player-one-score');
         const player2Mark = document.querySelector('.player-two-score');
@@ -79,28 +83,42 @@
         player2Mark.innerHTML = player2.wins;
     }
 
-    function makeMark(position) {
+    /* ====================== ADD MARK AND UPDATE GAME BOARD ====================== */
+    function addPlayerMark(position) {
         boardStatus[position] = gamePlay.getCurrentPlayersMark();
         buildGameBoard();
     }
 
+    /* ====================== WIN ACTIONS ====================== */
     function checkForWin() {
 
+        turnCount++;
+        
+        if(turnCount === 9) {
+            console.log("tie");
+            return;
+        } 
+
         for(let i = 0; i < 8; i++) {
-            if(boardStatus[winCondition[i][0]] === 'X' && boardStatus[winCondition[i][1]] === 'X' && boardStatus[winCondition[i][2]] === 'X') {
-                
-                let winner = getWinningPlayer('X');
-                gamePlay.updatePlayerTurnInDOM(winner);
-                
-                return winner;
 
+            if(boardStatus[winCondition[i][0]] === 'X' 
+            && boardStatus[winCondition[i][1]] === 'X' 
+            && boardStatus[winCondition[i][2]] === 'X') {
+                
+                gamePlay.updatePlayerTurnInDOM(player1);
+                return player1;
 
-            } else if(boardStatus[winCondition[i][0]] === 'O' && boardStatus[winCondition[i][1]] === 'O' && boardStatus[winCondition[i][2]] === 'O') {
-                console.log('O Wins');
+            } else if(boardStatus[winCondition[i][0]] === 'O' 
+                   && boardStatus[winCondition[i][1]] === 'O' 
+                   && boardStatus[winCondition[i][2]] === 'O') {
+                
+                gamePlay.updatePlayerTurnInDOM(player2);
+                return player2;
             }
         }
     }
 
+    /* ====================== ASSOCIATE MARK WITH PLAYERNAME ====================== */
     function getWinningPlayer(marker) {
         if(player1.playerMark === 'X') {
             return player1;
@@ -108,7 +126,8 @@
         return player2;
     }
 
-    return { buildGameBoard, winCondition };
+    /* ====================== RETURN ====================== */
+    return { buildGameBoard };
 })();
 
 
@@ -123,8 +142,8 @@ const player = (playerName, playerMark) => {
 }
 
 // Create player and computer
-const player1 = player('Player 1', '');
-const player2 = player('Player 2', '');
+const player1 = player('Player 1', 'X');
+const player2 = player('Player 2', 'O');
 
 
 
@@ -178,15 +197,12 @@ const gamePlay = (() => {
     /* ====================== SET WHO GOES FIRST / SET PLAYER MARKERS ====================== */
     function pickWhoGoesFirst() {
         if(Math.random() >= 0.5) {
-            player1.playerMark = 'X';
-            player2.playerMark = 'O';
             return player1;
         }
-        player2.playerMark = 'X';
-        player1.playerMark = 'O';
         return player2;
     } 
 
+    /* ====================== GET CURRENT PLAYER'S MARK ====================== */
     function getCurrentPlayersMark() {
         return playerTurn.playerMark;
     }
