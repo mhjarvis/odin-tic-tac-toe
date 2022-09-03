@@ -35,7 +35,14 @@
             }
             
             makeMark(i);
-            checkForWin();
+            let checking = checkForWin();
+
+            if(checking) {
+                checking.wins++;
+                updateScoreBoard();
+                return;
+            }
+
             gamePlay.playTurn();
         })
     }
@@ -58,6 +65,13 @@
         buildGameBoard();
     }
 
+    function updateScoreBoard() {
+        const player1Mark = document.querySelector('.player-one-score');
+        const player2Mark = document.querySelector('.player-two-score');
+        player1Mark.innerHTML = player1.wins;
+        player2Mark.innerHTML = player2.wins;
+    }
+
     function makeMark(position) {
         boardStatus[position] = gamePlay.getCurrentPlayersMark();
         buildGameBoard();
@@ -67,11 +81,24 @@
 
         for(let i = 0; i < 8; i++) {
             if(boardStatus[winCondition[i][0]] === 'X' && boardStatus[winCondition[i][1]] === 'X' && boardStatus[winCondition[i][2]] === 'X') {
-                console.log('X Wins');
+                
+                let winner = getWinningPlayer('X');
+                gamePlay.updatePlayerTurnInDOM(winner);
+                
+                return winner;
+
+
             } else if(boardStatus[winCondition[i][0]] === 'O' && boardStatus[winCondition[i][1]] === 'O' && boardStatus[winCondition[i][2]] === 'O') {
                 console.log('O Wins');
             }
         }
+    }
+
+    function getWinningPlayer(marker) {
+        if(player1.playerMark === 'X') {
+            return player1;
+        }
+        return player2;
     }
 
     return { buildGameBoard, winCondition };
@@ -114,10 +141,16 @@ const gamePlay = (() => {
     }
 
     /* ====================== TEXT OUTPUT TO PLAYERS ====================== */
-    function updatePlayerTurnInDOM() {
-        console.log(playerTurn.playerName + " in dom");
+    function updatePlayerTurnInDOM(status) {
 
         const turnText = document.querySelector('.scoreboard-updates');
+
+        if(status) {
+            console.log('tesst');
+            turnText.innerHTML = `${status.playerName} Won!`;
+            return false;
+        }
+        console.log('showing after status');
 
         if(turnText.innerHTML === '') {
             turnText.innerHTML = `${playerTurn.playerName} goes first.`;
@@ -153,7 +186,7 @@ const gamePlay = (() => {
         return playerTurn.playerMark;
     }
 
-    return { playTurn, getCurrentPlayersMark, updatePlayerTurn }
+    return { playTurn, getCurrentPlayersMark, updatePlayerTurn, updatePlayerTurnInDOM }
 })();
 
    
