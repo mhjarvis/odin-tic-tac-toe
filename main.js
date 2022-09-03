@@ -5,7 +5,7 @@
 
 const gameBoard = (() => {
 
-    let boardStatus = ['0', '1', '2', '3', '4', '5', '6', '7', '8'];
+    let boardStatus = ['', '', '', '', '', '', '', '', ''];
     const winCondition = [
         [0, 1, 2],
         [3, 4, 5],
@@ -71,9 +71,22 @@ const player = (playerName, playerMark) => {
 
     gameBoard.buildGameBoard();     // initialize gameboard
 
+    let playerTurn = pickWhoGoesFirst();
+    console.log(playerTurn);
+
     // Create player and computer
     const player1 = player('Player 1', 'X');
     const computer = player('Plyer 2', 'O');
+
+
+
+
+
+
+
+
+
+
 
     function pickWhoGoesFirst() {
         if(Math.random() >= 0.5) {
