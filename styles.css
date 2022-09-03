@@ -86,7 +86,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 200px;
+    height: 250px;
     width: 100%;
     margin-top: 70px;
 }
@@ -152,6 +152,7 @@
     background-color: rgb(78, 78, 78);
 }
 
-.scoreboard-udpates {
-    
+.scoreboard-updates {
+    font-size: 2rem;
+    padding-top: 20px;
 }

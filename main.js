@@ -29,7 +29,11 @@
     for(let i = 0; i < 9; i++) {
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
-
+            
+            if(boardStatus[i] !== '') {                     // do nothing if index has a value
+                return;
+            }
+            
             makeMark(i);
             gamePlay.playTurn();
 
@@ -40,8 +44,6 @@
 
         })
     }
-
-    
 
     const startButton = document.querySelector('.start-game-button');       // start-game button
     startButton.addEventListener("click", function() {
@@ -69,6 +71,8 @@
     return { buildGameBoard, winCondition };
 })();
 
+
+
 /* ======================
         PLAYER FACTORY
    ====================== */
@@ -82,17 +86,18 @@ const player = (playerName, playerMark) => {
 const player1 = player('Player 1', '');
 const player2 = player('Player 2', '');
 
+
+
 /* ======================
         GAME-PLAY OBJ
    ====================== */
    
 const gamePlay = (() => {
 
-    gameBoard.buildGameBoard();     // initialize gameboard
+    gameBoard.buildGameBoard();                 // initialize gameboard
 
-    let wonGame = false;
-    let playerTurn = pickWhoGoesFirst();
-    updatePlayerTurnInDOM();
+    let playerTurn = pickWhoGoesFirst();        // hold current player's turn
+    updatePlayerTurnInDOM();                    // set initial value for playerturn
 
     /* ====================== PLAY TURN ====================== */
     function playTurn() {
