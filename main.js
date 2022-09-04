@@ -4,7 +4,8 @@
    ====================== */
 
    let hasSomeoneWon = false;
-   turnCount = 0;
+   let ties = 0;
+   let turnCount = 0;
 
    const gameBoard = (() => {
 
@@ -33,39 +34,37 @@
     for(let i = 0; i < 9; i++) {
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
-            
-            if(hasSomeoneWon === true){             // prevent further marks if there is a winner
-                return;
-            }
-
-            if(boardStatus[i] !== '') {             // prevent marks on squares that have been marked
-                return;
-            }
-            
-            addPlayerMark(i);
-
-            let checking = checkForWin();
-            if(checking) {
-                console.log('checking ' + checking.playerName);
-                checking.wins++;
-                updateScoreBoard();
-                hasSomeoneWon = true;
-                return;
-            }
-
-            gamePlay.playTurn();
+            runGameplayChecks(i);
         })
     }
 
-    const startButton = document.querySelector('.start-game-button');       // start-game button
+    const startButton = document.querySelector('.reset-board-button');       // start-game button
     startButton.addEventListener("click", function() {
-        console.log("start-button");
+        resetGameBoard();
     })
     
     const resetButton = document.querySelector('.reset-game-button');       // reset-game button
     resetButton.addEventListener("click", function() {
-        resetGameBoard();
+        resetGame();
     })
+
+    /* ====================== CHECKS AND MAKING PLAYER MARK ====================== */
+    function runGameplayChecks(i) {
+
+        if(hasSomeoneWon){ return }             // stop making marks if there is a winner
+        if(boardStatus[i] !== '') { return }    // prevent marks on squares that have been marked
+        
+        addPlayerMark(i);
+
+        let checking = checkForWin();
+        if(checking) {
+            checking.wins++;
+            updateScoreBoard();
+            hasSomeoneWon = true;
+            return;
+        }
+        gamePlay.playTurn();
+    }
 
     /* ====================== RESET GAME BOARD ====================== */
 
@@ -73,14 +72,27 @@
         boardStatus = ['', '', '', '', '', '', '', '', ''];
         buildGameBoard();
         hasSomeoneWon = false;
+        turnCount = 0;
+    }
+
+    /* ====================== RESET GAME ====================== */
+
+    function resetGame() {
+        resetGameBoard();
+        player1.wins = 0;
+        player2.wins = 0;
+        ties = 0;
+        updateScoreBoard();
     }
 
     /* ====================== UPDATE SCOREBOARD DISPLAY ====================== */
     function updateScoreBoard() {
         const player1Mark = document.querySelector('.player-one-score');
         const player2Mark = document.querySelector('.player-two-score');
+        const tieScore = document.querySelector('.ties-score');
         player1Mark.innerHTML = player1.wins;
         player2Mark.innerHTML = player2.wins;
+        tieScore.innerHTML = ties;
     }
 
     /* ====================== ADD MARK AND UPDATE GAME BOARD ====================== */
@@ -93,10 +105,11 @@
     function checkForWin() {
 
         turnCount++;
-        
-        if(turnCount === 9) {
-            console.log("tie");
-            return;
+
+        if(turnCount == 9) {                            // check for tie
+            ties++;
+            gamePlay.updatePlayerTurnInDOM('tie');
+            return 'tie';
         } 
 
         for(let i = 0; i < 8; i++) {
@@ -118,13 +131,13 @@
         }
     }
 
-    /* ====================== ASSOCIATE MARK WITH PLAYERNAME ====================== */
-    function getWinningPlayer(marker) {
+/* ====================== ASSOCIATE MARK WITH PLAYERNAME ====================== */
+/*     function getWinningPlayer(marker) {
         if(player1.playerMark === 'X') {
             return player1;
         }
         return player2;
-    }
+    } */
 
     /* ====================== RETURN ====================== */
     return { buildGameBoard };
@@ -170,8 +183,15 @@ const gamePlay = (() => {
     function updatePlayerTurnInDOM(status) {
 
         const turnText = document.querySelector('.scoreboard-updates');
-
+        
+        if(status == 'tie') {
+            turnText.innerHTML = "It's a Tie!";
+            console.log("Its working");
+            return;
+        }
+        
         if(status) {
+
             turnText.innerHTML = `${status.playerName} Won!`;
             return false;
         }
