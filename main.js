@@ -1,13 +1,13 @@
  
-/* ======================
-        GAMEBOARD OBJ
-   ====================== */
+/* ===============================================================================================
+                                        GAMEBOARD OBJECT
+   =============================================================================================== */
 
-   let hasSomeoneWon = false;
-   let ties = 0;
-   let turnCount = 0;
+const gameBoard = (() => {
 
-   const gameBoard = (() => {
+    let hasSomeoneWon = false;
+    let ties = 0;
+    let turnCount = 0;
 
     let boardStatus = ['', '', '', '', '', '', '', '', ''];
     const winCondition = [
@@ -73,6 +73,7 @@
         buildGameBoard();
         hasSomeoneWon = false;
         turnCount = 0;
+        gamePlay.updatePlayerTurnInDOM();
     }
 
     /* ====================== RESET GAME ====================== */
@@ -131,23 +132,15 @@
         }
     }
 
-/* ====================== ASSOCIATE MARK WITH PLAYERNAME ====================== */
-/*     function getWinningPlayer(marker) {
-        if(player1.playerMark === 'X') {
-            return player1;
-        }
-        return player2;
-    } */
-
     /* ====================== RETURN ====================== */
-    return { buildGameBoard };
+    return { };
+
 })();
 
 
-
-/* ======================
-        PLAYER FACTORY
-   ====================== */
+/* ===============================================================================================
+                                        PLAYER FACTORY
+   =============================================================================================== */
 
 const player = (playerName, playerMark) => {
     let wins = 0;
@@ -158,15 +151,11 @@ const player = (playerName, playerMark) => {
 const player1 = player('Player 1', 'X');
 const player2 = player('Player 2', 'O');
 
-
-
-/* ======================
-        GAME-PLAY OBJ
-   ====================== */
+/* ===============================================================================================
+                                        GAMEPLAY OBJECT
+   =============================================================================================== */
    
 const gamePlay = (() => {
-
-    gameBoard.buildGameBoard();                 // initialize gameboard
 
     let playerTurn = pickWhoGoesFirst();        // hold current player's turn
     updatePlayerTurnInDOM();                    // set initial value for playerturn
@@ -272,3 +261,11 @@ Gameboard Object:
 Player Object:
 
 */
+
+/* ====================== ASSOCIATE MARK WITH PLAYERNAME ====================== */
+/*     function getWinningPlayer(marker) {
+        if(player1.playerMark === 'X') {
+            return player1;
+        }
+        return player2;
+    } */
