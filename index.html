@@ -10,7 +10,17 @@
 <body>
     <div class="form-background"></div>
     <div class="form-container">
-        <form method="" name="get_player_name" class="get_player_names" id="get_player_names"></form>
+        
+        <form method="" name="get_player_name" class="get_player_names" id="get_player_names">
+            <fieldset>
+                <legend class="legend">Player Names</legend>
+                <label for="player1_name" class="name-label">Player 1</label>
+                <input type="text" id="player1_name" name="player1_name">
+                <label for="player2_name" class="name-label">Player 2</label>
+                <input type="text" id="player2_name" name="player2_name">
+                <input type="button" value="Submit" id="submit-names-button">
+            </fieldset>
+        </form>
     </div>
 
     <!-- Heading Element -->
