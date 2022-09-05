@@ -36,6 +36,20 @@ const gameBoard = (() => {
         box.addEventListener("click", function() {
             runGameplayChecks(i);
         })
+
+        box.onmouseover = function() {
+            let value = gamePlay.getCurrentPlayersMark();
+            if(boardStatus[i] === '' && hasSomeoneWon === false) {
+                box.innerHTML = value;
+            }
+        }
+
+        box.onmouseout = function() {
+            let resetValue = '';
+            if(boardStatus[i] === '') {
+                box.innerHTML = resetValue;
+            }
+        }
     }
 
     const startButton = document.querySelector('.reset-board-button');       // start-game button
