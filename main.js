@@ -34,7 +34,7 @@ const gameBoard = (() => {
     for(let i = 0; i < 9; i++) {
         const box = document.getElementById(`box${i}`);     // for all individual game squares
         box.addEventListener("click", function() {
-            runGameplayChecks(i);
+ -            runGameplayChecks(i);
         })
 
         box.onmouseover = function() {
@@ -235,7 +235,6 @@ const gamePlay = (() => {
 
    
 /*
-4. Build the logic that checks for when the game is over! Should check for 3-in-a-row and a tie.
 
 5. Clean up the interface to allow players to put in their names, include a button to start/restart the game and add a display element that congratulates the winning player!
 
