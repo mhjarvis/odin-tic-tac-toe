@@ -55,7 +55,7 @@
 
 .board {
     display: grid;
-    grid-template: 250px 250px 250px / 250px 250px 250px;
+    grid-template: 230px 230px 230px / 230px 230px 230px;
     gap: 10px;
     background-color: black;
     
@@ -73,9 +73,9 @@
     font-size: 10rem;
 }
 
-.box:hover {
+/* .box:hover {
     background-color: rgb(199, 199, 199);
-}
+} */
 
 /* ======================
        6. GAME BOARD 
@@ -86,7 +86,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 250px;
+    height: 300px;
     width: 100%;
     margin-top: 70px;
 }
@@ -96,7 +96,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-evenly;
-    width: 600px;
+    width: 700px;
     height: 120px;
     box-shadow: -10px -10px 40px, 10px 10px 40px;
 
@@ -125,21 +125,21 @@
     border-bottom: 2px solid black;
 }
 
-.player-one-wins, .ties {
+/* .player-one-wins, .ties {
     border-right: 2px solid black;
-}
+} */
 
 .game-button-container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 500px;
-    height: 100px;
+    width: 800px;
+    height: 150px;
 }
 
 .game-button-container button {
-    width: 180px;
-    height: 50px;
+    width: 300px;
+    height: 70px;
     border: none;
     border-radius: 20px;
     background-color: rgb(0, 0, 0);
